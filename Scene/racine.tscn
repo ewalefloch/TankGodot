@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3 uid="uid://1hoxtt5rrj3g"]
+
+[ext_resource type="Script" uid="uid://cui7wdfwcrq14" path="res://voiture.gd" id="1_4vgkv"]
+[ext_resource type="PackedScene" uid="uid://x3hptsw1ytdq" path="res://Bonus/bonus.tscn" id="2_xsnwh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xsnwh"]
+albedo_color = Color(0.11764706, 0.31764707, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4vgkv"]
+material = SubResource("StandardMaterial3D_xsnwh")
+size = Vector3(100, 1, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xsnwh"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4vgkv"]
+albedo_color = Color(0.9658291, 0.0007901144, 0.9692221, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rkcwo"]
+material = SubResource("StandardMaterial3D_4vgkv")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4vgkv"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_xsnwh"]
+
+[node name="Racine" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.6657509, 0.16691034, -0.72726667, 0.70453924, 0.18040884, 0.6863504, 0.24576432, -0.9693264, 0.0025124382, 0, 22.526733, 1.7969944)
+shadow_enabled = true
+
+[node name="Sol" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8374374, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Sol"]
+mesh = SubResource("BoxMesh_4vgkv")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sol"]
+shape = SubResource("BoxShape3D_xsnwh")
+metadata/_edit_lock_ = true
+
+[node name="Voiture" type="RigidBody3D" parent="."]
+linear_damp = 10.0
+script = ExtResource("1_4vgkv")
+
+[node name="Camera3D" type="Camera3D" parent="Voiture"]
+transform = Transform3D(1, 0, 0, 0, 0.9842111, 0.17699885, 0, -0.17699885, 0.9842111, 0, 2.4500458, 7.389147)
+fov = 40.179073
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Voiture"]
+transform = Transform3D(0.3444686, 0, -0.93879783, 0, 1, 0, 0.93879783, 0, 0.3444686, 0, 1.0278223, 0)
+mesh = SubResource("BoxMesh_rkcwo")
+skeleton = NodePath("../..")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Voiture"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+shape = SubResource("BoxShape3D_4vgkv")
+metadata/_edit_lock_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.9999847, 0.005532665, 0, -0.005532665, 0.9999847, 0, 0, 0, 1, 1.4009342, 0, -4.0743017)
+mesh = SubResource("BoxMesh_xsnwh")
+
+[node name="Bonus" parent="." instance=ExtResource("2_xsnwh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3615012, -2.2982025)

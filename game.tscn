@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://bjka1drpx3yow"]
+
+[ext_resource type="PackedScene" uid="uid://bh5h347n2ooq7" path="res://Tank/tank.tscn" id="1_80nbo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xsnwh"]
+albedo_color = Color(0.11764706, 0.31764707, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_e2o6t"]
+material = SubResource("StandardMaterial3D_xsnwh")
+size = Vector3(100, 1, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_feb5d"]
+size = Vector3(100, 1, 100)
+
+[node name="Game" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.6657509, 0.16691034, -0.72726667, 0.70453924, 0.18040884, 0.6863504, 0.24576432, -0.9693264, 0.0025124382, 0, 22.526733, 1.7969944)
+shadow_enabled = true
+
+[node name="Sol" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8374374, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Sol"]
+mesh = SubResource("BoxMesh_e2o6t")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sol"]
+shape = SubResource("BoxShape3D_feb5d")
+metadata/_edit_lock_ = true
+
+[node name="TankP1" parent="." instance=ExtResource("1_80nbo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.9234, 0, 10.696169)
+
+[node name="TankP2" parent="." instance=ExtResource("1_80nbo")]
+transform = Transform3D(-0.99973303, 0, -0.0231061, 0, 1, 0, 0.0231061, 0, -0.99973303, -48.9234, -0.14890194, 2.6728306)
+player_id = 2

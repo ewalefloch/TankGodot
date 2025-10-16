@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://buvywldvvmux5"]
+
+[ext_resource type="Script" uid="uid://doxqiplqcp07y" path="res://Projectile/projectile.gd" id="1_a85iw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_akgne"]
+albedo_color = Color(0.80830485, 0, 0.18887451, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_a85iw"]
+material = SubResource("StandardMaterial3D_akgne")
+radius = 0.1
+height = 0.5
+
+[node name="Projectile" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+script = ExtResource("1_a85iw")
+metadata/_custom_type_script = "uid://doxqiplqcp07y"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_a85iw")
+skeleton = NodePath("")

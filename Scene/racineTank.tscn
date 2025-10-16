@@ -1,0 +1,79 @@
+[gd_scene load_steps=13 format=3 uid="uid://l1la5jcjxf2i"]
+
+[ext_resource type="Script" uid="uid://cui7wdfwcrq14" path="res://voiture.gd" id="1_c4qag"]
+[ext_resource type="Script" uid="uid://coam7s0r2amiv" path="res://Scene/racine_tank.gd" id="1_hc438"]
+[ext_resource type="PackedScene" uid="uid://bh5h347n2ooq7" path="res://Tank/tank.tscn" id="2_xnda3"]
+[ext_resource type="Script" uid="uid://c15x6sswn4mtp" path="res://Bonus/coin_spawner.gd" id="3_6vhke"]
+[ext_resource type="PackedScene" uid="uid://x3hptsw1ytdq" path="res://Bonus/bonus.tscn" id="3_xnda3"]
+[ext_resource type="PackedScene" uid="uid://bedm5labi4dcb" path="res://HUD/hud.tscn" id="5_t83bk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xsnwh"]
+albedo_color = Color(0.11764706, 0.31764707, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4vgkv"]
+material = SubResource("StandardMaterial3D_xsnwh")
+size = Vector3(100, 1, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xsnwh"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vitpe"]
+albedo_color = Color(1, 0.023529412, 1, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4vgkv"]
+material = SubResource("StandardMaterial3D_vitpe")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4vgkv"]
+
+[node name="Racine" type="Node3D" node_paths=PackedStringArray("tank", "hud")]
+script = ExtResource("1_hc438")
+tank = NodePath("Tank")
+hud = NodePath("HUD")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.6657509, 0.16691034, -0.72726667, 0.70453924, 0.18040884, 0.6863504, 0.24576432, -0.9693264, 0.0025124382, 0, 22.526733, 1.7969944)
+shadow_enabled = true
+
+[node name="Sol" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8374374, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Sol"]
+mesh = SubResource("BoxMesh_4vgkv")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sol"]
+shape = SubResource("BoxShape3D_xsnwh")
+metadata/_edit_lock_ = true
+
+[node name="Voiture" type="RigidBody3D" parent="."]
+linear_damp = 10.0
+script = ExtResource("1_c4qag")
+
+[node name="Camera3D" type="Camera3D" parent="Voiture"]
+transform = Transform3D(1, 0, 0, 0, 0.9842111, 0.17699885, 0, -0.17699885, 0.9842111, 0, 2.4500458, 7.389147)
+fov = 40.179073
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Voiture"]
+transform = Transform3D(0.3444686, 0, -0.93879783, 0, 1, 0, 0.93879783, 0, 0.3444686, 0, 1.0278223, 0)
+mesh = SubResource("CapsuleMesh_4vgkv")
+skeleton = NodePath("../..")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Voiture"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+shape = SubResource("BoxShape3D_4vgkv")
+metadata/_edit_lock_ = true
+
+[node name="Tank" parent="." instance=ExtResource("2_xnda3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5187473, 1.4761425, 3.978596)
+max_forward_speed = 2.5
+max_reverse_speed = 2.0
+
+[node name="CoinSpawner" type="Node3D" parent="."]
+script = ExtResource("3_6vhke")
+bonus_scene = ExtResource("3_xnda3")
+number_of_coins = 100
+spawn_area_size = Vector2(100, 100)
+metadata/_custom_type_script = "uid://c15x6sswn4mtp"
+
+[node name="HUD" parent="." instance=ExtResource("5_t83bk")]
