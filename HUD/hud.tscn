@@ -9,17 +9,17 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[node name="HUD" type="CanvasLayer" node_paths=PackedStringArray("health_label", "gold_label")]
+[node name="HUD" type="CanvasLayer" node_paths=PackedStringArray("health_label", "player_label")]
 script = ExtResource("1_37p78")
 health_label = NodePath("Panel/Health")
-gold_label = NodePath("Panel/Gold")
+player_label = NodePath("Panel/Player")
 metadata/_custom_type_script = "uid://brksou84y4g26"
 
 [node name="Panel" type="Panel" parent="."]
 offset_left = 18.0
 offset_top = 24.0
 offset_right = 250.0
-offset_bottom = 105.0
+offset_bottom = 101.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_37p78")
 
 [node name="Health" type="Label" parent="Panel"]
@@ -27,16 +27,19 @@ layout_mode = 1
 anchors_preset = -1
 anchor_top = -0.019000001
 anchor_right = 0.095000006
-offset_left = 14.0
-offset_top = 12.5390005
-offset_right = 179.95999
-offset_bottom = 34.532
+offset_left = 13.0
+offset_top = 40.539
+offset_right = 178.95999
+offset_bottom = 62.532
 text = "Health : 100"
 
-[node name="Gold" type="Label" parent="Panel"]
-layout_mode = 0
-offset_left = 14.0
-offset_top = 48.0
-offset_right = 203.0
-offset_bottom = 71.0
-text = "Gold : 0"
+[node name="Player" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.019000001
+anchor_right = 0.095000006
+offset_left = 13.0
+offset_top = 13.5390005
+offset_right = 178.95999
+offset_bottom = 35.531998
+text = "Player 1"
