@@ -43,6 +43,7 @@ extends CharacterBody3D
 # --- signal pour le HUD
 signal health_changed(new_health: int)
 signal gold_changed(new_gold: int)
+signal died(player_id: int)
 
 # --- Etats internes (vitesses des chenilles en m/s)
 var left_speed: float = 0.0
@@ -154,5 +155,9 @@ func add_gold(amount: int) -> void:
 	
 func take_damage(amount: int) -> void:
 	self.health -= amount
-	if health < 0:
-		self.health = 0
+	if health <= 0:
+		die()
+
+func die() -> void:
+	emit_signal("died", player_id)
+	queue_free()
