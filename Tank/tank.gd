@@ -160,4 +160,4 @@ func take_damage(amount: int) -> void:
 
 func die() -> void:
 	emit_signal("died", player_id)
-	queue_free()
+	visible = false

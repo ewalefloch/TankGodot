@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dobbpyh3volmj" path="res://Turret/turret.tscn" id="2_1ealj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_how3p"]
-size = Vector3(1.5, 1.5, 1)
+size = Vector3(1.0161133, 1.1268616, 1.0444336)
 
 [sub_resource type="BoxMesh" id="BoxMesh_6lwfj"]
 size = Vector3(1, 0.5, 1)
@@ -27,7 +27,7 @@ debug_print = true
 metadata/_custom_type_script = "uid://bg1f0xho17knt"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.027160645, -0.020031095, 0.032958984)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.020080566, -0.18017209, 0.0107421875)
 shape = SubResource("BoxShape3D_how3p")
 metadata/_edit_lock_ = true
 
