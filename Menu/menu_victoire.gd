@@ -1,44 +1,46 @@
 extends Control
 
-@export var level_scene: PackedScene = null
-@export var main_menu_scene: PackedScene = null
+@export var game_node: Node3D  # Le nœud contenant le jeu
+@export var main_menu: Control  # Référence au menu principal
 @export var winner_label: Label
 @export var restart_btn: Button
 @export var title_btn: Button
 
 func _ready() -> void:
 	visible = false
-	restart_btn.pressed.connect(_on_restart_pressed)
-	title_btn.pressed.connect(_on_main_menu_pressed)
 	
-	# Important : Ne pas mettre en pause ce Control quand le jeu est en pause
+	if restart_btn:
+		restart_btn.pressed.connect(_on_restart_pressed)
+	if title_btn:
+		title_btn.pressed.connect(_on_main_menu_pressed)
+	
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
-# Appelé par le Level quand une partie est finie
 func show_with_winner(winner_name: String) -> void:
-	process_mode = Node.PROCESS_MODE_ALWAYS
-	print("show_with_winner")
-	winner_label.text = "Player %s gagne !" % winner_name
+	if winner_label:
+		winner_label.text = "VICTOIRE DE %s !" % winner_name
+	
 	visible = true
-	# Donner le focus pour que ui_accept déclenche le bouton
-	restart_btn.grab_focus()
+	
+	if restart_btn:
+		restart_btn.grab_focus()
 
 func _on_restart_pressed() -> void:
-	# Remettre le jeu en marche
 	get_tree().paused = false
+	visible = false
 	
-	if level_scene != null:
-		get_tree().change_scene_to_packed(level_scene)
-	else:
-		# Fallback : recharger la scène actuelle
-		get_tree().reload_current_scene()
+	# Réinitialiser et redémarrer le jeu
+	if game_node:
+		if game_node.has_method("restart_game"):
+			game_node.restart_game()
+		else:
+			# Fallback : recharger la scène complète
+			get_tree().reload_current_scene()
 
 func _on_main_menu_pressed() -> void:
-	# Remettre le jeu en marche
 	get_tree().paused = false
+	visible = false
 	
-	if main_menu_scene != null:
-		get_tree().change_scene_to_packed(main_menu_scene)
-	else:
-		# Fallback : aller au menu principal par chemin
-		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+	# Retourner au menu principal
+	if main_menu:
+		main_menu.show_main_menu()

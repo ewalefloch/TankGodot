@@ -6,13 +6,14 @@
 
 [node name="Main" type="Node3D"]
 
-[node name="MenuPrincipal" parent="." instance=ExtResource("2_o1mnh")]
-level_scene = ExtResource("1_a0fxe")
-
-[node name="MenuVictoire" parent="." instance=ExtResource("3_ee6qk")]
-level_scene = ExtResource("1_a0fxe")
-main_menu_scene = ExtResource("2_o1mnh")
-
 [node name="Game" parent="." node_paths=PackedStringArray("victory_menu", "main_menu") instance=ExtResource("1_a0fxe")]
 victory_menu = NodePath("../MenuVictoire")
+main_menu = NodePath("../MenuPrincipal")
+
+[node name="MenuPrincipal" parent="." node_paths=PackedStringArray("game_node", "victory_menu") instance=ExtResource("2_o1mnh")]
+game_node = NodePath("../Game")
+victory_menu = NodePath("../MenuVictoire")
+
+[node name="MenuVictoire" parent="." node_paths=PackedStringArray("game_node", "main_menu") instance=ExtResource("3_ee6qk")]
+game_node = NodePath("../Game")
 main_menu = NodePath("../MenuPrincipal")
