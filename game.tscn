@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bjka1drpx3yow"]
+[gd_scene load_steps=9 format=3 uid="uid://bjka1drpx3yow"]
 
 [ext_resource type="PackedScene" uid="uid://bh5h347n2ooq7" path="res://Tank/tank.tscn" id="1_80nbo"]
+[ext_resource type="Script" uid="uid://b7s2spwfk8iq4" path="res://game.gd" id="1_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://bedm5labi4dcb" path="res://HUD/hud.tscn" id="2_e2o6t"]
 [ext_resource type="Script" uid="uid://dboxx3bjruxw0" path="res://HUD/hud_player.gd" id="3_feb5d"]
 
@@ -17,7 +18,12 @@ size = Vector3(100, 1, 100)
 [sub_resource type="BoxShape3D" id="BoxShape3D_feb5d"]
 size = Vector3(100, 1, 100)
 
-[node name="Game" type="Node3D"]
+[node name="Game" type="Node3D" node_paths=PackedStringArray("tankP1", "tankP2", "victory_menu", "main_menu")]
+script = ExtResource("1_fc0e3")
+tankP1 = NodePath("HBoxContainer/SubViewportContainer/SubViewport/TankP1")
+tankP2 = NodePath("HBoxContainer/SubViewportContainer2/SubViewport/TankP2")
+victory_menu = NodePath("")
+main_menu = NodePath("")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_direction = 2
@@ -39,10 +45,9 @@ size = Vector2i(957, 1080)
 render_target_update_mode = 4
 
 [node name="TankP1" parent="HBoxContainer/SubViewportContainer/SubViewport" instance=ExtResource("1_80nbo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.9234, 0, 10.696169)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.9234, 1.4879389, 10.696169)
 
 [node name="HUD1" parent="HBoxContainer/SubViewportContainer/SubViewport" instance=ExtResource("2_e2o6t")]
-player_id = null
 player_color = null
 
 [node name="HudPlayer1" type="Node" parent="HBoxContainer/SubViewportContainer/SubViewport" node_paths=PackedStringArray("tank", "hud")]
@@ -67,11 +72,10 @@ size = Vector2i(958, 1080)
 render_target_update_mode = 4
 
 [node name="TankP2" parent="HBoxContainer/SubViewportContainer2/SubViewport" instance=ExtResource("1_80nbo")]
-transform = Transform3D(-0.99973303, 0, -0.0231061, 0, 1, 0, 0.0231061, 0, -0.99973303, -48.9234, -0.14890194, 2.6728306)
+transform = Transform3D(-0.99973303, 0, -0.0231061, 0, 1, 0, 0.0231061, 0, -0.99973303, -48.9234, 1.227376, 2.6728306)
 player_id = 2
 
 [node name="HUD2" parent="HBoxContainer/SubViewportContainer2/SubViewport" instance=ExtResource("2_e2o6t")]
-player_id = null
 player_color = null
 
 [node name="HudPlayer2" type="Node" parent="HBoxContainer/SubViewportContainer2/SubViewport" node_paths=PackedStringArray("tank", "hud")]

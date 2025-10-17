@@ -1,0 +1,73 @@
+[gd_scene load_steps=5 format=3 uid="uid://cx64dmmqb4sf8"]
+
+[ext_resource type="Script" uid="uid://dy1acrg1kj7fi" path="res://Menu/menu_victoire.gd" id="1_i6ht0"]
+
+[sub_resource type="Gradient" id="Gradient_xoj6f"]
+offsets = PackedFloat32Array(0.71428573)
+colors = PackedColorArray(0.0617714, 0.18929389, 0.18554974, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ne136"]
+gradient = SubResource("Gradient_xoj6f")
+
+[sub_resource type="LabelSettings" id="LabelSettings_ge8jm"]
+font_size = 96
+
+[node name="MenuVictoire" type="Control" node_paths=PackedStringArray("winner_label", "restart_btn", "title_btn")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_i6ht0")
+winner_label = NodePath("Titre")
+restart_btn = NodePath("VBoxContainer/ReStartBtn")
+title_btn = NodePath("VBoxContainer/MenuBtn")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_ne136")
+
+[node name="Titre" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -491.0
+offset_top = 189.0
+offset_right = 502.0
+offset_bottom = 321.0
+grow_horizontal = 2
+text = "VICTOIRE DE PLAYER "
+label_settings = SubResource("LabelSettings_ge8jm")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -331.0
+offset_top = -75.0
+offset_right = 332.0
+offset_bottom = 179.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="ReStartBtn" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "RESTART"
+
+[node name="MenuBtn" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "MAIN MENU"

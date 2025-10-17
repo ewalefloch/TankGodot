@@ -11,10 +11,8 @@ height = 0.5
 radius = 0.1
 height = 0.8
 
-[node name="Turret" type="Node3D" node_paths=PackedStringArray("turret_base", "barrel")]
+[node name="Turret" type="Node3D"]
 script = ExtResource("1_3oylf")
-turret_base = NodePath("Base")
-barrel = NodePath("Barrel")
 projectile_scene = ExtResource("2_tjdg3")
 muzzle_path = NodePath("Barrel/MuzzlePoint")
 metadata/_custom_type_script = "uid://bo5ghrk2b648y"

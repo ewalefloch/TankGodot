@@ -1,12 +1,12 @@
 class_name Projectile
-extends Node3D
+extends Area3D
 # Projectile simple sans collision - Godot 4.5
 # Indentation : TAB
 
 @export var speed: float = 1.0       # m/s
 @export var lifetime: float = 2.0     # secondes avant destruction automatique
 @export var mesh_scale: float = 0.2   # taille du mesh visuel si tu veux scale
-
+@export var damage : int = 10
 var direction: Vector3 = Vector3.ZERO
 var shooter: Node = null  # paramètre pour compatibilité, non utilisé ici
 
@@ -15,6 +15,7 @@ func setup(dir: Vector3, shooter_node: Node = null) -> void:
 	shooter = shooter_node
 
 func _ready() -> void:
+	body_entered.connect(_on_body_entered)
 	await get_tree().create_timer(lifetime).timeout
 	if is_instance_valid(self):
 		queue_free()
@@ -23,3 +24,9 @@ func _physics_process(delta: float) -> void:
 	if direction == Vector3.ZERO:
 		return
 	translate(direction * speed * delta)
+	
+
+func _on_body_entered(body: Node3D) -> void:
+	if body is Tank :
+		body.call("take_damage",damage)
+		queue_free()

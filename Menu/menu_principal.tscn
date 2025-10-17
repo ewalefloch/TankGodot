@@ -1,0 +1,72 @@
+[gd_scene load_steps=5 format=3 uid="uid://ckgrrjp133jbb"]
+
+[ext_resource type="Script" uid="uid://vbytu01x0su1" path="res://Menu/menu_principal.gd" id="1_bj1uy"]
+
+[sub_resource type="Gradient" id="Gradient_7dlib"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.086329244, 0.17189863, 0.28149492, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bj1uy"]
+gradient = SubResource("Gradient_7dlib")
+
+[sub_resource type="LabelSettings" id="LabelSettings_gmcsc"]
+font_size = 96
+
+[node name="MenuPrincipal" type="Control" node_paths=PackedStringArray("start_btn", "quit_btn")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bj1uy")
+start_btn = NodePath("VBoxContainer/StartBtn")
+quit_btn = NodePath("VBoxContainer/QuitBtn")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_bj1uy")
+
+[node name="Titre" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -491.0
+offset_top = 189.0
+offset_right = 502.0
+offset_bottom = 321.0
+grow_horizontal = 2
+text = "LA GUERRE DES TANK"
+label_settings = SubResource("LabelSettings_gmcsc")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -331.0
+offset_top = -75.0
+offset_right = 332.0
+offset_bottom = 179.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="StartBtn" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "START"
+
+[node name="QuitBtn" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "QUIT"

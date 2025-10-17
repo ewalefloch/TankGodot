@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3f26uwever70"]
+
+[ext_resource type="PackedScene" uid="uid://bjka1drpx3yow" path="res://game.tscn" id="1_a0fxe"]
+[ext_resource type="PackedScene" uid="uid://ckgrrjp133jbb" path="res://Menu/menu_principal.tscn" id="2_o1mnh"]
+[ext_resource type="PackedScene" uid="uid://cx64dmmqb4sf8" path="res://Menu/menu_victoire.tscn" id="3_ee6qk"]
+
+[node name="Main" type="Node3D"]
+
+[node name="MenuPrincipal" parent="." instance=ExtResource("2_o1mnh")]
+level_scene = ExtResource("1_a0fxe")
+
+[node name="MenuVictoire" parent="." instance=ExtResource("3_ee6qk")]
+level_scene = ExtResource("1_a0fxe")
+main_menu_scene = ExtResource("2_o1mnh")
+
+[node name="Game" parent="." node_paths=PackedStringArray("victory_menu", "main_menu") instance=ExtResource("1_a0fxe")]
+victory_menu = NodePath("../MenuVictoire")
+main_menu = NodePath("../MenuPrincipal")
