@@ -29,4 +29,5 @@ func _physics_process(delta: float) -> void:
 func _on_body_entered(body: Node3D) -> void:
 	if body is Tank :
 		body.call("take_damage",damage)
-		queue_free()
+	queue_free()
+	

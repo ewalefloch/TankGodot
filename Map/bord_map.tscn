@@ -1,0 +1,127 @@
+[gd_scene load_steps=3 format=3 uid="uid://btyaanl8eykui"]
+
+[ext_resource type="ArrayMesh" uid="uid://c75ekwpkemq0q" path="res://Voel/Map/Barriere.vox" id="1_l5ttg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8y85g"]
+size = Vector3(49.961975, 1.0234375, 1)
+
+[node name="BordMap" type="StaticBody3D"]
+
+[node name="Barriere" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -24.028278, 0, 0)
+mesh = ExtResource("1_l5ttg")
+skeleton = NodePath("../..")
+
+[node name="Barriere2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -21.945356, 0, 0)
+mesh = ExtResource("1_l5ttg")
+skeleton = NodePath("../..")
+
+[node name="Barriere3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -19.873365, 0, 0)
+mesh = ExtResource("1_l5ttg")
+skeleton = NodePath("../..")
+
+[node name="Barriere4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -17.773855, 0, 0)
+mesh = ExtResource("1_l5ttg")
+skeleton = NodePath("../..")
+
+[node name="Barriere5" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -15.589416, 0, 0)
+mesh = ExtResource("1_l5ttg")
+skeleton = NodePath("../..")
+
+[node name="Barriere6" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -13.434178, 0, 0)
+mesh = ExtResource("1_l5ttg")
+skeleton = NodePath("../..")
+
+[node name="Barriere7" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -11.201883, 0, 0)
+mesh = ExtResource("1_l5ttg")
+skeleton = NodePath("../..")
+
+[node name="Barriere8" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -9.04262, 0, 0)
+mesh = ExtResource("1_l5ttg")
+skeleton = NodePath("../..")
+
+[node name="Barriere9" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -6.867303, 0, 0)
+mesh = ExtResource("1_l5ttg")
+skeleton = NodePath("../..")
+
+[node name="Barriere10" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -4.684376, 0, 0)
+mesh = ExtResource("1_l5ttg")
+skeleton = NodePath("../..")
+
+[node name="Barriere11" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -2.477326, 0, 0)
+mesh = ExtResource("1_l5ttg")
+skeleton = NodePath("../..")
+
+[node name="Barriere12" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.3282299, 0, 0)
+mesh = ExtResource("1_l5ttg")
+skeleton = NodePath("../..")
+
+[node name="Barriere13" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 1.8125029, 0, 0)
+mesh = ExtResource("1_l5ttg")
+skeleton = NodePath("../..")
+
+[node name="Barriere14" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 3.9590871, 0, 0)
+mesh = ExtResource("1_l5ttg")
+skeleton = NodePath("../..")
+
+[node name="Barriere15" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 6.2393084, 0, 0)
+mesh = ExtResource("1_l5ttg")
+skeleton = NodePath("../..")
+
+[node name="Barriere16" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 8.368439, 0, 0)
+mesh = ExtResource("1_l5ttg")
+skeleton = NodePath("../..")
+
+[node name="Barriere17" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 10.691945, 0, 0)
+mesh = ExtResource("1_l5ttg")
+skeleton = NodePath("../..")
+
+[node name="Barriere18" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 12.953263, 0, 0)
+mesh = ExtResource("1_l5ttg")
+skeleton = NodePath("../..")
+
+[node name="Barriere19" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 15.1485615, 0, 0)
+mesh = ExtResource("1_l5ttg")
+skeleton = NodePath("../..")
+
+[node name="Barriere20" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 17.424358, 0, 0)
+mesh = ExtResource("1_l5ttg")
+skeleton = NodePath("../..")
+
+[node name="Barriere21" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 19.70248, 0, 0)
+mesh = ExtResource("1_l5ttg")
+skeleton = NodePath("../..")
+
+[node name="Barriere22" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 21.886688, 0, 0)
+mesh = ExtResource("1_l5ttg")
+skeleton = NodePath("../..")
+
+[node name="Barriere23" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 23.960777, 0, 0)
+mesh = ExtResource("1_l5ttg")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08969116, 0.3830042, 0)
+shape = SubResource("BoxShape3D_8y85g")

@@ -1,24 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bh5h347n2ooq7"]
+[gd_scene load_steps=5 format=3 uid="uid://bh5h347n2ooq7"]
 
 [ext_resource type="Script" uid="uid://bg1f0xho17knt" path="res://Tank/tank.gd" id="1_6lwfj"]
 [ext_resource type="PackedScene" uid="uid://dobbpyh3volmj" path="res://Turret/turret.tscn" id="2_1ealj"]
+[ext_resource type="ArrayMesh" uid="uid://it5an57lj37i" path="res://Voel/TankBase.vox" id="3_aevcn"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_how3p"]
-size = Vector3(1.0161133, 1.1268616, 1.0444336)
-
-[sub_resource type="BoxMesh" id="BoxMesh_6lwfj"]
-size = Vector3(1, 0.5, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ealj"]
-albedo_color = Color(0, 0, 0, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_a62es"]
-material = SubResource("StandardMaterial3D_1ealj")
-size = Vector3(0.5, 0.5, 0.5)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_1ealj"]
-radius = 0.3
-height = 1.0
+size = Vector3(2.4783936, 1.7119519, 2.893671)
 
 [node name="Tank" type="CharacterBody3D" node_paths=PackedStringArray("turret")]
 script = ExtResource("1_6lwfj")
@@ -26,39 +13,23 @@ turret = NodePath("Turret")
 debug_print = true
 metadata/_custom_type_script = "uid://bg1f0xho17knt"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.020080566, -0.18017209, 0.0107421875)
-shape = SubResource("BoxShape3D_how3p")
-metadata/_edit_lock_ = true
-
-[node name="Chassis" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2122162, 0)
-mesh = SubResource("BoxMesh_6lwfj")
-skeleton = NodePath("")
-metadata/_edit_lock_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Chassis"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.056673646, 0.38840508)
-mesh = SubResource("BoxMesh_a62es")
-
-[node name="TrackRight" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.338, -0.456, 0)
-mesh = SubResource("CapsuleMesh_1ealj")
-skeleton = NodePath("")
-metadata/_edit_lock_ = true
-
-[node name="TrackLeft" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -0.391, -0.456, 0)
-mesh = SubResource("CapsuleMesh_1ealj")
-skeleton = NodePath("../TrackRight")
-metadata/_edit_lock_ = true
-
 [node name="Turret" parent="." instance=ExtResource("2_1ealj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.42162633)
 
 [node name="CameraArm" type="SpringArm3D" parent="Turret"]
-transform = Transform3D(1, 0, 0, 0, 0.9991149, -0.04206748, 0, 0.04206748, 0.9991149, 0, 0.7445723, 1.6804051)
+transform = Transform3D(1, 0, 0, 0, 0.9991149, -0.04206748, 0, 0.04206748, 0.9991149, 0.011684179, 0.9315618, 3.2087917)
 
 [node name="Camera3D" type="Camera3D" parent="Turret/CameraArm"]
 transform = Transform3D(1, 0, 0, 0, 0.9535331, 0.3012884, 0, -0.3012884, 0.95353305, 0, 0, 0)
 current = true
 metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.014221191, -0.5542818, 0.37222958)
+visible = false
+shape = SubResource("BoxShape3D_how3p")
+metadata/_edit_lock_ = true
+
+[node name="TankBase" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.898787, 0.3588382)
+mesh = ExtResource("3_aevcn")
