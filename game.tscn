@@ -1,29 +1,18 @@
-[gd_scene load_steps=9 format=3 uid="uid://bjka1drpx3yow"]
+[gd_scene load_steps=7 format=3 uid="uid://bjka1drpx3yow"]
 
 [ext_resource type="PackedScene" uid="uid://bh5h347n2ooq7" path="res://Tank/tank.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://b7s2spwfk8iq4" path="res://game.gd" id="1_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://bedm5labi4dcb" path="res://HUD/hud.tscn" id="2_e2o6t"]
 [ext_resource type="Script" uid="uid://dboxx3bjruxw0" path="res://HUD/hud_player.gd" id="3_feb5d"]
+[ext_resource type="PackedScene" uid="uid://betnwn6ir1sla" path="res://Map/map.tscn" id="5_7jktm"]
 
 [sub_resource type="Theme" id="Theme_80nbo"]
 HBoxContainer/constants/separation = 0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xsnwh"]
-albedo_color = Color(0.11764706, 0.31764707, 0, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_e2o6t"]
-material = SubResource("StandardMaterial3D_xsnwh")
-size = Vector3(100, 1, 100)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_feb5d"]
-size = Vector3(100, 1, 100)
-
-[node name="Game" type="Node3D" node_paths=PackedStringArray("tankP1", "tankP2", "victory_menu", "main_menu")]
+[node name="Game" type="Node3D" node_paths=PackedStringArray("tankP1", "tankP2")]
 script = ExtResource("1_fc0e3")
 tankP1 = NodePath("HBoxContainer/SubViewportContainer/SubViewport/TankP1")
 tankP2 = NodePath("HBoxContainer/SubViewportContainer2/SubViewport/TankP2")
-victory_menu = NodePath("")
-main_menu = NodePath("")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_direction = 2
@@ -45,7 +34,7 @@ size = Vector2i(957, 1080)
 render_target_update_mode = 4
 
 [node name="TankP1" parent="HBoxContainer/SubViewportContainer/SubViewport" instance=ExtResource("1_80nbo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.9234, 1.4879389, 10.696169)
+transform = Transform3D(-0.028218262, 0, -0.9996018, 0, 1, 0, 0.9996018, 0, -0.028218262, -16.953539, 1.4879389, -0.30536366)
 
 [node name="HUD1" parent="HBoxContainer/SubViewportContainer/SubViewport" instance=ExtResource("2_e2o6t")]
 player_color = null
@@ -72,7 +61,7 @@ size = Vector2i(958, 1080)
 render_target_update_mode = 4
 
 [node name="TankP2" parent="HBoxContainer/SubViewportContainer2/SubViewport" instance=ExtResource("1_80nbo")]
-transform = Transform3D(-0.99973303, 0, -0.0231061, 0, 1, 0, 0.0231061, 0, -0.99973303, -48.9234, 1.227376, 2.6728306)
+transform = Transform3D(-0.095394045, 0, 0.9954396, 0, 1, 0, -0.9954396, 0, -0.095394045, 15.547592, 1.227376, 0.7260208)
 player_id = 2
 
 [node name="HUD2" parent="HBoxContainer/SubViewportContainer2/SubViewport" instance=ExtResource("2_e2o6t")]
@@ -90,13 +79,4 @@ metadata/_custom_type_script = "uid://dboxx3bjruxw0"
 transform = Transform3D(0.665751, 0.16691035, -0.72726655, 0.7045393, 0.18040885, 0.6863505, 0.24576433, -0.9693264, 0.002512468, 0, 22.526733, 1.7969944)
 shadow_enabled = true
 
-[node name="Sol" type="StaticBody3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8374374, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Sol"]
-mesh = SubResource("BoxMesh_e2o6t")
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Sol"]
-shape = SubResource("BoxShape3D_feb5d")
-metadata/_edit_lock_ = true
+[node name="Map" parent="World" instance=ExtResource("5_7jktm")]
