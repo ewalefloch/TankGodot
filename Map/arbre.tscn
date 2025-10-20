@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dlvvit1c5lh4q"]
+
+[ext_resource type="ArrayMesh" uid="uid://cbeao8xohlsi5" path="res://Voel/Map/Arbre.vox" id="1_v0xmm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qve05"]
+size = Vector3(0.3288269, 2.6313477, 0.33061218)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wicok"]
+size = Vector3(1.5852051, 0.11462402, 1.3901978)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cdaic"]
+size = Vector3(1.5578613, 1.1804199, 1.663208)
+
+[node name="Arbre" type="StaticBody3D"]
+
+[node name="Arbre" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_v0xmm")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.049484253, 0.22570801, -0.043937683)
+shape = SubResource("BoxShape3D_qve05")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.036010742, -1.1562626, -0.0026550293)
+shape = SubResource("BoxShape3D_wicok")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06530762, 0.8830388, -0.024353027)
+shape = SubResource("BoxShape3D_cdaic")

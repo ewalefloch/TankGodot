@@ -25,6 +25,10 @@ window/size/mode=2
 
 project/assembly_name="MonPremierJeu"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/MagicaVoxel_Importer_with_Extensions/plugin.cfg")
+
 [input]
 
 ui_accept={
