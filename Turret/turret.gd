@@ -21,6 +21,7 @@ extends Node3D
 @export var projectile_damage: int = 1
 @export var fire_cooldown: float = 1.0
 @export var muzzle_path: NodePath
+@export var song_shot: AudioStreamPlayer3D
 
 # Nouveau : Paramètres de recul
 @export_group("Recul")
@@ -79,6 +80,19 @@ func shoot() -> void:
 		push_warning("No muzzle_point")
 		return
 	
+	# Vérification du son
+	if song_shot == null:
+		push_warning("song_shot AudioStreamPlayer3D not found")
+	elif song_shot.stream == null:
+		push_warning("No audio stream assigned to song_shot")
+	
+	print("Avant play - Position:", song_shot.global_position)
+	print("Avant play - Playing:", song_shot.playing)
+	song_shot.play()
+	print("Après play - Playing:", song_shot.playing)
+	print("Volume DB:", song_shot.volume_db)
+	print("Max distance:", song_shot.max_distance)
+	
 	# Créer le projectile
 	var proj = projectile_scene.instantiate()
 	get_tree().current_scene.add_child(proj)
@@ -94,7 +108,18 @@ func shoot() -> void:
 	
 	# Appliquer le recul au tank
 	apply_recoil_to_tank(-dir)
-	
+	# Jouer le son
+	if song_shot and song_shot.stream:
+		# Créer un joueur temporaire global
+		var global_player = AudioStreamPlayer.new()
+		global_player.stream = song_shot.stream
+		global_player.volume_db = 0
+		get_tree().root.add_child(global_player)
+		global_player.play()
+
+		# Supprimer après lecture
+		global_player.finished.connect(func(): global_player.queue_free())
+
 	time_since_last_shot = fire_cooldown
 
 func apply_recoil_to_tank(shoot_direction: Vector3) -> void:

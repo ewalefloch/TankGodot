@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cn74nw4gijcbv"
+path="res://.godot/imported/Voicy_Tank Firing.mp3-7dd8df34580605a14b1b1320d159f3ba.mp3str"
+
+[deps]
+
+source_file="res://Musique/Voicy_Tank Firing.mp3"
+dest_files=["res://.godot/imported/Voicy_Tank Firing.mp3-7dd8df34580605a14b1b1320d159f3ba.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

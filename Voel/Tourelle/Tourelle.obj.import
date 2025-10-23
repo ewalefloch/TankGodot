@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cqxwlq5u1bv32"
+path="res://.godot/imported/Tourelle.obj-9d16c4824f84298d4529e3f88a5d7fd2.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Tourelle.obj-9d16c4824f84298d4529e3f88a5d7fd2.mesh"]
+
+source_file="res://Voel/Tourelle/Tourelle.obj"
+dest_files=["res://.godot/imported/Tourelle.obj-9d16c4824f84298d4529e3f88a5d7fd2.mesh", "res://.godot/imported/Tourelle.obj-9d16c4824f84298d4529e3f88a5d7fd2.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
