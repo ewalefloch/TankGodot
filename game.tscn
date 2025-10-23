@@ -37,7 +37,6 @@ render_target_update_mode = 4
 transform = Transform3D(-0.028218262, 0, -0.9996018, 0, 1, 0, 0.9996018, 0, -0.028218262, -16.953539, 1.4879389, -0.30536366)
 
 [node name="HUD1" parent="HBoxContainer/SubViewportContainer/SubViewport" instance=ExtResource("2_e2o6t")]
-player_color = null
 
 [node name="HudPlayer1" type="Node" parent="HBoxContainer/SubViewportContainer/SubViewport" node_paths=PackedStringArray("tank", "hud")]
 script = ExtResource("3_feb5d")
@@ -65,7 +64,6 @@ transform = Transform3D(-0.095394045, 0, 0.9954396, 0, 1, 0, -0.9954396, 0, -0.0
 player_id = 2
 
 [node name="HUD2" parent="HBoxContainer/SubViewportContainer2/SubViewport" instance=ExtResource("2_e2o6t")]
-player_color = null
 
 [node name="HudPlayer2" type="Node" parent="HBoxContainer/SubViewportContainer2/SubViewport" node_paths=PackedStringArray("tank", "hud")]
 script = ExtResource("3_feb5d")

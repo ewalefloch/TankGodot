@@ -86,13 +86,6 @@ func shoot() -> void:
 	elif song_shot.stream == null:
 		push_warning("No audio stream assigned to song_shot")
 	
-	print("Avant play - Position:", song_shot.global_position)
-	print("Avant play - Playing:", song_shot.playing)
-	song_shot.play()
-	print("Après play - Playing:", song_shot.playing)
-	print("Volume DB:", song_shot.volume_db)
-	print("Max distance:", song_shot.max_distance)
-	
 	# Créer le projectile
 	var proj = projectile_scene.instantiate()
 	get_tree().current_scene.add_child(proj)
