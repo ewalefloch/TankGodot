@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://eeqdec6swdks"]
+
+[ext_resource type="AudioStream" uid="uid://cqywu5spxs3rk" path="res://Musique/Fight.mp3" id="1_1q65e"]
+
+[node name="song_manager" type="Node3D"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_1q65e")
+autoplay = true

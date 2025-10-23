@@ -39,6 +39,9 @@ extends CharacterBody3D
 		gold = value
 		gold_changed.emit(gold)
 
+@export var camera: Camera3D
+
+
 # --- signal pour le HUD
 signal health_changed(new_health: int)
 signal gold_changed(new_gold: int)
@@ -58,6 +61,12 @@ var was_fully_depleted: bool = false
 var recoil_velocity: Vector3 = Vector3.ZERO
 var recoil_timer: float = 0.0
 var recoil_duration: float = 0.0
+
+func _ready() -> void:
+	if camera:
+		print("Position caméra:", camera.global_position)
+	else:
+		print("PAS DE CAMÉRA!")
 
 func _physics_process(delta: float) -> void:
 	handle_boost(delta)
