@@ -1,32 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://dobbpyh3volmj"]
+[gd_scene load_steps=4 format=3 uid="uid://dobbpyh3volmj"]
 
 [ext_resource type="Script" uid="uid://bo5ghrk2b648y" path="res://Turret/turret.gd" id="1_3oylf"]
 [ext_resource type="PackedScene" uid="uid://buvywldvvmux5" path="res://Projectile/projectile.tscn" id="2_tjdg3"]
+[ext_resource type="ArrayMesh" uid="uid://cqxwlq5u1bv32" path="res://Voel/Tourelle/Tourelle.obj" id="3_ttsi1"]
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_8xk5y"]
-top_radius = 0.3
-height = 0.5
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_3oylf"]
-radius = 0.1
-height = 0.8
-
-[node name="Turret" type="Node3D"]
+[node name="Turret" type="Node3D" node_paths=PackedStringArray("song_shot")]
 script = ExtResource("1_3oylf")
 projectile_scene = ExtResource("2_tjdg3")
-muzzle_path = NodePath("Barrel/MuzzlePoint")
+muzzle_path = NodePath("Tourelle2/MuzzlePoint")
+song_shot = NodePath("")
 metadata/_custom_type_script = "uid://bo5ghrk2b648y"
 
-[node name="Base" type="MeshInstance3D" parent="."]
-mesh = SubResource("CylinderMesh_8xk5y")
-skeleton = NodePath("")
-metadata/_edit_lock_ = true
+[node name="Tourelle2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5996411, 0, 0.6552557)
+mesh = ExtResource("3_ttsi1")
 
-[node name="Barrel" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.0002966682, -0.99999994, 0, 0.99999994, 0.0002966682, 0, 0.11226159, -0.59146494)
-mesh = SubResource("CapsuleMesh_3oylf")
-skeleton = NodePath("../Base")
+[node name="MuzzlePoint" type="Marker3D" parent="Tourelle2"]
+transform = Transform3D(1, 0, 0, 0, 0.0002966682, -0.99999994, 0, 0.99999994, 0.0002966682, 0.59171784, 0.5103291, -3.5177789)
 metadata/_edit_lock_ = true
-
-[node name="MuzzlePoint" type="Marker3D" parent="Barrel"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3677981, -0.00010911375)

@@ -39,6 +39,9 @@ extends CharacterBody3D
 		gold = value
 		gold_changed.emit(gold)
 
+@export var camera: Camera3D
+
+
 # --- signal pour le HUD
 signal health_changed(new_health: int)
 signal gold_changed(new_gold: int)
@@ -113,7 +116,6 @@ func _physics_process(delta: float) -> void:
 	if use_smoothing and abs(left_input) < 0.01 and abs(right_input) < 0.01:
 		target_velocity = target_velocity.lerp(Vector3.ZERO, clamp(linear_damping * delta, 0, 1))
 
-	# MODIFIÉ : Ajouter le recul à la vélocité
 	velocity.x = target_velocity.x + recoil_velocity.x
 	velocity.z = target_velocity.z + recoil_velocity.z
 	velocity.y = velocity.y - ProjectSettings.get_setting("physics/3d/default_gravity") * delta
@@ -143,27 +145,26 @@ func handle_recoil(delta: float) -> void:
 
 func handle_boost(delta: float) -> void:
 	var boost_action = "p%d_boost" % player_id
-
-	if Input.is_action_pressed(boost_action) and boost_time_remaining > 0.0 and boost_recharge_timer <= 0.0:
+	
+	# Utiliser le boost si disponible ET pas en recharge forcée
+	if Input.is_action_pressed(boost_action) and boost_time_remaining > 0.0 and not was_fully_depleted:
 		is_boosting = true
 		boost_time_remaining -= delta
 		if boost_time_remaining <= 0.0:
 			boost_time_remaining = 0.0
 			is_boosting = false
-			was_fully_depleted = true
-			boost_recharge_timer = boost_recharge_delay
+			was_fully_depleted = true  # Bloquer jusqu'à recharge complète
 	else:
 		is_boosting = false
 	
-	if boost_recharge_timer > 0.0:
-		boost_recharge_timer -= delta
-		if boost_recharge_timer <= 0.0:
-			boost_recharge_timer = 0.0
-			was_fully_depleted = false
-			boost_time_remaining = boost_max_duration
-	elif not is_boosting and boost_time_remaining < boost_max_duration and not was_fully_depleted:
+	# Recharge partielle continue
+	if not is_boosting and boost_time_remaining < boost_max_duration:
 		boost_time_remaining += boost_partial_recharge_rate * delta
 		boost_time_remaining = min(boost_time_remaining, boost_max_duration)
+		
+		# Débloquer seulement quand plein à 100%
+		if boost_time_remaining >= boost_max_duration:
+			was_fully_depleted = false
 		
 func add_gold(amount: int) -> void:
 	gold += amount

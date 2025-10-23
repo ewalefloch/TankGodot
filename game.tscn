@@ -37,7 +37,6 @@ render_target_update_mode = 4
 transform = Transform3D(-0.028218262, 0, -0.9996018, 0, 1, 0, 0.9996018, 0, -0.028218262, -16.953539, 1.4879389, -0.30536366)
 
 [node name="HUD1" parent="HBoxContainer/SubViewportContainer/SubViewport" instance=ExtResource("2_e2o6t")]
-player_color = null
 
 [node name="HudPlayer1" type="Node" parent="HBoxContainer/SubViewportContainer/SubViewport" node_paths=PackedStringArray("tank", "hud")]
 script = ExtResource("3_feb5d")
@@ -65,7 +64,6 @@ transform = Transform3D(-0.095394045, 0, 0.9954396, 0, 1, 0, -0.9954396, 0, -0.0
 player_id = 2
 
 [node name="HUD2" parent="HBoxContainer/SubViewportContainer2/SubViewport" instance=ExtResource("2_e2o6t")]
-player_color = null
 
 [node name="HudPlayer2" type="Node" parent="HBoxContainer/SubViewportContainer2/SubViewport" node_paths=PackedStringArray("tank", "hud")]
 script = ExtResource("3_feb5d")
@@ -76,7 +74,7 @@ metadata/_custom_type_script = "uid://dboxx3bjruxw0"
 [node name="World" type="Node3D" parent="."]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
-transform = Transform3D(0.665751, 0.16691035, -0.72726655, 0.7045393, 0.18040885, 0.6863505, 0.24576433, -0.9693264, 0.002512468, 0, 22.526733, 1.7969944)
+transform = Transform3D(0.9415371, 0.32341486, -0.09439664, 0.07597159, 0.069159076, 0.99470866, 0.32823193, -0.9437264, 0.040545493, 0, 31.734024, 1.7969944)
 shadow_enabled = true
 
 [node name="Map" parent="World" instance=ExtResource("5_7jktm")]

@@ -15,6 +15,10 @@ run/main_scene="uid://d3f26uwever70"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+SongManager="*res://Musique/song_manager.tscn"
+
 [display]
 
 window/size/viewport_width=1920
@@ -24,6 +28,10 @@ window/size/mode=2
 [dotnet]
 
 project/assembly_name="MonPremierJeu"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/MagicaVoxel_Importer_with_Extensions/plugin.cfg")
 
 [input]
 
