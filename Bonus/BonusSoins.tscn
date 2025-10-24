@@ -1,0 +1,81 @@
+[gd_scene load_steps=10 format=3 uid="uid://diymrxqukuhjn"]
+
+[ext_resource type="Script" uid="uid://c732jhaqeuate" path="res://Bonus/bonus_soins.gd" id="1_doe4q"]
+[ext_resource type="Shader" uid="uid://d8qy4jn630ck" path="res://Bonus/Hologram.tres" id="2_oyagi"]
+[ext_resource type="ArrayMesh" uid="uid://b8hx0cnut23c" path="res://Voel/Bonus/soin.obj" id="3_oyagi"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_doe4q"]
+render_priority = 0
+shader = ExtResource("2_oyagi")
+shader_parameter/Scanline_Color = Color(1, 0, 0, 0.09411765)
+shader_parameter/Scanline_Scroll_Speed = 0.5
+shader_parameter/Scanline_Scale = 20.0
+shader_parameter/Fresnel_Power = 3.0
+shader_parameter/Fresnel_Color = Color(0, 0, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_t6fl4"]
+material = SubResource("ShaderMaterial_doe4q")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_knh41"]
+radius = 0.25
+
+[sub_resource type="Animation" id="Animation_oyagi"]
+resource_name = "new_animation"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.2831855, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_p2n6k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t6fl4"]
+_data = {
+&"RESET": SubResource("Animation_p2n6k"),
+&"new_animation": SubResource("Animation_oyagi")
+}
+
+[node name="BonusSoins" type="Area3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+script = ExtResource("1_doe4q")
+metadata/_custom_type_script = "uid://c732jhaqeuate"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_t6fl4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_knh41")
+
+[node name="Soin" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.10000001, 0, 0, 0, -4.371139e-09, -0.10000001, 0, 0.10000001, -4.371139e-09, -0.20024043, -0.18951337, -0.21454336)
+mesh = ExtResource("3_oyagi")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_t6fl4")
+}
+autoplay = "new_animation"
