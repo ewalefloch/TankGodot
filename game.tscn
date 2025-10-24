@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bjka1drpx3yow"]
+[gd_scene load_steps=8 format=3 uid="uid://bjka1drpx3yow"]
 
 [ext_resource type="PackedScene" uid="uid://bh5h347n2ooq7" path="res://Tank/tank.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://b7s2spwfk8iq4" path="res://game.gd" id="1_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://bedm5labi4dcb" path="res://HUD/hud.tscn" id="2_e2o6t"]
 [ext_resource type="Script" uid="uid://dboxx3bjruxw0" path="res://HUD/hud_player.gd" id="3_feb5d"]
 [ext_resource type="PackedScene" uid="uid://betnwn6ir1sla" path="res://Map/map.tscn" id="5_7jktm"]
+[ext_resource type="PackedScene" uid="uid://bcvdpw5kqk8vt" path="res://Bonus/BonusSpawn.tscn" id="6_ryrav"]
 
 [sub_resource type="Theme" id="Theme_80nbo"]
 HBoxContainer/constants/separation = 0
@@ -78,3 +79,5 @@ transform = Transform3D(0.9415371, 0.32341486, -0.09439664, 0.07597159, 0.069159
 shadow_enabled = true
 
 [node name="Map" parent="World" instance=ExtResource("5_7jktm")]
+
+[node name="BonusSpawn" parent="World" instance=ExtResource("6_ryrav")]

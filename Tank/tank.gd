@@ -44,6 +44,7 @@ extends CharacterBody3D
 
 # --- signal pour le HUD
 signal health_changed(new_health: int)
+signal bouclier_changed(new_health: int)
 signal gold_changed(new_gold: int)
 signal died(player_id: int)
 
@@ -57,14 +58,32 @@ var boost_recharge_timer: float = 0.0
 var is_boosting: bool = false
 var was_fully_depleted: bool = false
 
-# NOUVEAU : Variables pour le recul
 var recoil_velocity: Vector3 = Vector3.ZERO
 var recoil_timer: float = 0.0
 var recoil_duration: float = 0.0
 
+# powerup boost
+@export_group("Boost")
+var _boost_powerup_active: bool = false
+var _boost_powerup_time: float = 0.0
+var _boost_powerup_time_max: float = 0.0
+@export var boost_effect: Node3D
+
+# Shield (bouclier)
+@export_group("Bouclier")
+var _shield_active: bool = false
+var _shield_time: float = 0.0
+var _shield_time_max: float = 0.0
+var shield_remaining: int = 0:
+	set(value):
+		shield_remaining = value
+		bouclier_changed.emit(shield_remaining)
+@export var bouclier_effect: MeshInstance3D
+
 func _physics_process(delta: float) -> void:
 	handle_boost(delta)
-	handle_recoil(delta)  # NOUVEAU : Gérer le recul
+	handle_recoil(delta) 
+	handle_bonus_time(delta)
 	
 	turret.player_id = player_id
 	var left_forward_action = "p%s_left_forward" % player_id
@@ -133,7 +152,6 @@ func apply_recoil(direction: Vector3, force: float, duration: float) -> void:
 	recoil_timer = duration
 	recoil_duration = duration
 
-# NOUVEAU : Gérer le recul au fil du temps
 func handle_recoil(delta: float) -> void:
 	if recoil_timer > 0.0:
 		recoil_timer -= delta
@@ -143,37 +161,103 @@ func handle_recoil(delta: float) -> void:
 	else:
 		recoil_velocity = Vector3.ZERO
 
+func handle_bonus_time(delta: float) -> void :
+	if _shield_active:
+		_shield_time = max(0.0, _shield_time - delta)
+		if _shield_time <= 0.0:
+			_end_shield()
+			
+	if _boost_powerup_active:
+		_boost_powerup_time = max(0.0, _boost_powerup_time - delta)
+		if _boost_powerup_time <= 0.0:
+			_end_boost_powerup()
+		return
+
 func handle_boost(delta: float) -> void:
 	var boost_action = "p%d_boost" % player_id
-	
-	# Utiliser le boost si disponible ET pas en recharge forcée
-	if Input.is_action_pressed(boost_action) and boost_time_remaining > 0.0 and not was_fully_depleted:
+	var boost_pressed = Input.is_action_pressed(boost_action)
+
+	# --- Si powerup boost actif : le joueur peut booster librement,
+	# --- et le temps du powerup diminue uniquement quand il appuie sur le boost
+	if _boost_powerup_active:
+		if boost_pressed:
+			is_boosting = true
+		else:
+			is_boosting = false
+		return
+
+	# --- Sinon : comportement NORMAL (sans powerup) ---
+	if boost_pressed and boost_time_remaining > 0.0 and not was_fully_depleted:
 		is_boosting = true
 		boost_time_remaining -= delta
 		if boost_time_remaining <= 0.0:
 			boost_time_remaining = 0.0
 			is_boosting = false
-			was_fully_depleted = true  # Bloquer jusqu'à recharge complète
+			was_fully_depleted = true 
 	else:
 		is_boosting = false
-	
-	# Recharge partielle continue
+
 	if not is_boosting and boost_time_remaining < boost_max_duration:
 		boost_time_remaining += boost_partial_recharge_rate * delta
 		boost_time_remaining = min(boost_time_remaining, boost_max_duration)
-		
 		# Débloquer seulement quand plein à 100%
 		if boost_time_remaining >= boost_max_duration:
 			was_fully_depleted = false
+
 		
 func add_gold(amount: int) -> void:
 	gold += amount
 	
 func take_damage(amount: int) -> void:
-	self.health -= amount
-	if health <= 0:
-		die()
+	# absorption par le bouclier si actif
+	if _shield_active and shield_remaining > 0 and amount > 0:
+		change_bouclier(-amount)
+		
+		if shield_remaining <= 0:
+			change_health(-shield_remaining)
+			_end_shield()
+
+	if amount > 0:
+		change_health(-amount)
+		if health <= 0:
+			die()
+
+
+func change_health(delta: int) -> void:
+	health = clamp(health + delta, 0, 9999)
+	emit_signal("health_changed", health)
+
+func change_bouclier(delta: int) -> void:
+	shield_remaining = clamp(shield_remaining + delta, 0, 9999)
+	emit_signal("bouclier_changed", shield_remaining)
 
 func die() -> void:
 	emit_signal("died", player_id)
 	visible = false
+
+func start_boost_powerup(duration: float) -> void:
+	# active le powerup (durée en secondes)
+	_boost_powerup_active = true
+	boost_effect.visible=true
+	_boost_powerup_time = max(0.0, duration)
+	_boost_powerup_time_max = duration
+
+func _end_boost_powerup() -> void:
+	_boost_powerup_active = false
+	boost_effect.visible=false
+	_boost_powerup_time = 0.0
+
+func start_shield(duration: float, capacity: int) -> void:
+	# active le bouclier : durée (sec) et capacité (points absorbés)
+	_shield_active = true
+	bouclier_effect.visible = true
+	_shield_time = max(0.0, duration)
+	_shield_time_max = duration
+	change_bouclier(capacity)
+	print(shield_remaining)
+
+func _end_shield() -> void:
+	bouclier_effect.visible = false
+	_shield_active = false
+	_shield_time = 0.0
+	change_bouclier(0)
