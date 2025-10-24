@@ -1,0 +1,13 @@
+[gd_scene load_steps=5 format=3 uid="uid://bcvdpw5kqk8vt"]
+
+[ext_resource type="Script" uid="uid://dg2ueag5cvnhc" path="res://Bonus/bonus_spawn.gd" id="1_5l1h6"]
+[ext_resource type="PackedScene" uid="uid://diymrxqukuhjn" path="res://Bonus/BonusSoins.tscn" id="2_cie1k"]
+[ext_resource type="PackedScene" uid="uid://btatc7cocuwts" path="res://Bonus/BonusBoostTemp.tscn" id="3_jemeu"]
+[ext_resource type="PackedScene" uid="uid://c5arkcgubx1s0" path="res://Bonus/BonusBouclier.tscn" id="4_ddy1l"]
+
+[node name="BonusSpawn" type="Node3D"]
+script = ExtResource("1_5l1h6")
+bonus_soins_scene = ExtResource("2_cie1k")
+bonus_boost_scene = ExtResource("3_jemeu")
+bonus_bouclier_scene = ExtResource("4_ddy1l")
+spawn_interval = 30.0

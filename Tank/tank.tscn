@@ -1,20 +1,51 @@
-[gd_scene load_steps=7 format=3 uid="uid://bh5h347n2ooq7"]
+[gd_scene load_steps=12 format=3 uid="uid://bh5h347n2ooq7"]
 
 [ext_resource type="Script" uid="uid://bg1f0xho17knt" path="res://Tank/tank.gd" id="1_6lwfj"]
 [ext_resource type="PackedScene" uid="uid://dobbpyh3volmj" path="res://Turret/turret.tscn" id="2_1ealj"]
 [ext_resource type="AudioStream" uid="uid://cn74nw4gijcbv" path="res://Musique/Voicy_Tank Firing.mp3" id="3_tvts7"]
 [ext_resource type="ArrayMesh" uid="uid://bjbsfg1ftwkhb" path="res://Voel/tank/TankBase.obj" id="3_vtpoy"]
 [ext_resource type="ArrayMesh" uid="uid://df1kctrlyqbjf" path="res://Voel/chaine.vox" id="4_vtpoy"]
+[ext_resource type="Shader" uid="uid://d8qy4jn630ck" path="res://Bonus/Hologram.tres" id="6_22oo4"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_how3p"]
 size = Vector3(2.4783936, 1.4970727, 3.0197434)
 
-[node name="Tank" type="CharacterBody3D" node_paths=PackedStringArray("turret", "camera")]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fnpmj"]
+render_priority = 0
+shader = ExtResource("6_22oo4")
+shader_parameter/Scanline_Color = Color(1.92523e-06, 0.5154855, 0.4657026, 0)
+shader_parameter/Scanline_Scroll_Speed = 1.0
+shader_parameter/Scanline_Scale = 1.0
+shader_parameter/Fresnel_Power = 1.0
+shader_parameter/Fresnel_Color = Color(0, 0, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_wqkah"]
+material = SubResource("ShaderMaterial_fnpmj")
+radius = 1.8
+height = 3.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_22oo4"]
+render_priority = 0
+shader = ExtResource("6_22oo4")
+shader_parameter/Scanline_Color = Color(0.92578906, 0.0005196196, 0.89249885, 0)
+shader_parameter/Scanline_Scroll_Speed = 1.0
+shader_parameter/Scanline_Scale = 1.0
+shader_parameter/Fresnel_Power = 1.0
+shader_parameter/Fresnel_Color = Color(0, 0, 1, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_fnpmj"]
+material = SubResource("ShaderMaterial_22oo4")
+radius = 0.6
+height = 3.5
+
+[node name="Tank" type="CharacterBody3D" node_paths=PackedStringArray("turret", "camera", "boost_effect", "bouclier_effect")]
 script = ExtResource("1_6lwfj")
 turret = NodePath("Turret")
 boost_recharge_delay = 10.0
 debug_print = true
 camera = NodePath("Turret/CameraArm/Camera3D")
+boost_effect = NodePath("BoostInfini")
+bouclier_effect = NodePath("bouclier")
 metadata/_custom_type_script = "uid://bg1f0xho17knt"
 
 [node name="Turret" parent="." node_paths=PackedStringArray("song_shot") instance=ExtResource("2_1ealj")]
@@ -50,3 +81,19 @@ volume_db = -5.0
 unit_size = 20.0
 max_distance = 100.0
 bus = &"effect"
+
+[node name="bouclier" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8126409, 0.6525459, -1.4977224)
+visible = false
+mesh = SubResource("SphereMesh_wqkah")
+
+[node name="BoostInfini" type="Node3D" parent="."]
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BoostInfini"]
+transform = Transform3D(1, 0, 0, 0, 0.033242375, 0.99944735, 0, -0.99944735, 0.033242375, -0.15678549, 0.36612296, -1.5989399)
+mesh = SubResource("CapsuleMesh_fnpmj")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="BoostInfini"]
+transform = Transform3D(1, 0, 0, 0, 0.033242375, 0.99944735, 0, -0.99944735, 0.033242375, 1.7347045, 0.36612296, -1.5989399)
+mesh = SubResource("CapsuleMesh_fnpmj")

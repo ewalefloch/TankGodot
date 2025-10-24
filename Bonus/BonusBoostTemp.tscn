@@ -1,0 +1,82 @@
+[gd_scene load_steps=10 format=3 uid="uid://btatc7cocuwts"]
+
+[ext_resource type="Script" uid="uid://t36ufpjuelcp" path="res://Bonus/bonus_boost_temp.gd" id="1_5tu4p"]
+[ext_resource type="Shader" uid="uid://d8qy4jn630ck" path="res://Bonus/Hologram.tres" id="2_5tu4p"]
+[ext_resource type="ArrayMesh" uid="uid://dm3ahlclvlnhr" path="res://Voel/Bonus/boost.obj" id="3_nvqi5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5tu4p"]
+render_priority = 0
+shader = ExtResource("2_5tu4p")
+shader_parameter/Scanline_Color = Color(0.26999998, 0.6106667, 1, 0.09019608)
+shader_parameter/Scanline_Scroll_Speed = 1.0
+shader_parameter/Scanline_Scale = 1.0
+shader_parameter/Fresnel_Power = 3.0
+shader_parameter/Fresnel_Color = Color(0, 0, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_bcavs"]
+material = SubResource("ShaderMaterial_5tu4p")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5tu4p"]
+radius = 0.25
+
+[sub_resource type="Animation" id="Animation_nvqi5"]
+resource_name = "new_animation"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.2831855, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xwa7d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uus5n"]
+_data = {
+&"RESET": SubResource("Animation_xwa7d"),
+&"new_animation": SubResource("Animation_nvqi5")
+}
+
+[node name="BonusBoostTemp" type="Area3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+script = ExtResource("1_5tu4p")
+metadata/_custom_type_script = "uid://t36ufpjuelcp"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_bcavs")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_5tu4p")
+
+[node name="Boost" type="MeshInstance3D" parent="."]
+transform = Transform3D(-5.2453664e-09, -0.12, 9.313226e-09, 0.12, -5.2453664e-09, 3.5538895e-17, 3.330669e-16, 9.313226e-09, 0.12, 0.25399512, -0.15837625, 0.16406085)
+mesh = ExtResource("3_nvqi5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_uus5n")
+}
+autoplay = "new_animation"
